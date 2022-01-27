@@ -10,7 +10,7 @@
 struct Character
 {
     Character(int hp, int armor_, int attackDamage_ );
-    virtual ~Character() { }
+    virtual ~Character();
     
     /*
      a pure virtual getName function.
@@ -27,48 +27,32 @@ struct Character
     
     int takeDamage(int damage);
     
-    int getHP() const { return hitPoints; }
-    int getArmorLevel() const { return armor; }
-    int getAttackDamage() const { return attackDamage; }
-    bool getIsDefending() const { return isDefending; }
+    int getHP() const;
+    int getArmorLevel() const;
+    int getAttackDamage() const;
+    bool getIsDefending() const;
     
-    const std::vector<std::unique_ptr<Item>>& getHelpfulItems() const { return helpfulItems; }
-    const std::vector<std::unique_ptr<Item>>& getDefensiveItems() const { return defensiveItems; }
+    const std::vector<std::unique_ptr<Item>>& getHelpfulItems() const;
+    const std::vector<std::unique_ptr<Item>>& getDefensiveItems() const;
     
-    void boostArmor( int amount )
-    {
-        armor += amount;
-        std::cout << getName() << "'s armor level has been boosted to " << armor << std::endl;
-    }
+    void boostArmor( int amount );
     
-    void boostHitPoints( int amount )
-    {
-        hitPoints += amount;
-        std::cout << getName() << "'s hit point level has been boosted to " << hitPoints << std::endl;
-    }
+    void boostHitPoints( int amount );
     
-    void boostAttackDamage( int amount )
-    {
-        attackDamage += amount;
-        std::cout << getName() << "'s attack damage level has been boosted to " << attackDamage << std::endl;
-    }
+    void boostAttackDamage( int amount );
 
-    void printStats()
-    {
-        std::cout << getName() << "'s stats: " << std::endl;
-        std::cout << getStats(); //make your getStats() use a function from the Utility.h
-        
-        std::cout << std::endl;
-        std::cout << std::endl;
-    }
+    void printStats();
+    
 protected:
     std::vector<std::unique_ptr<Item>> defensiveItems;
     std::vector<std::unique_ptr<Item>> helpfulItems;
     int hitPoints, armor;
     int attackDamage;
     bool isDefending = false;
+    
 private:
     std::unique_ptr<int> initialHitPoints, initialArmorLevel, initialAttackDamage;
     
     void attackInternal(Character& other);
+    void resetStatLevel(int& value, std::unique_ptr<int>& initialPtr, float adjustment);
 };
