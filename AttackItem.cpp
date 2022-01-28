@@ -2,7 +2,7 @@
 #include "Utility.h"
 #include "Character.h"
 
-AttackItem::AttackItem() : Item("Attack Item", 4) {}
+AttackItem::AttackItem() : Item("Attack Item", 10) {}
 
 void AttackItem::use(Character* character)
 {

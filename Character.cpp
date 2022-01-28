@@ -90,14 +90,6 @@ int Character::takeDamage(int damage)
     return hitPoints;
 }
 
-int Character::getHP() const { return hitPoints; }
-int Character::getArmorLevel() const { return armor; }
-int Character::getAttackDamage() const { return attackDamage; }
-bool Character::getIsDefending() const { return isDefending; }
-
-const std::vector<std::unique_ptr<Item>>& Character::getHelpfulItems() const { return helpfulItems; }
-const std::vector<std::unique_ptr<Item>>& Character::getDefensiveItems() const { return defensiveItems; }
-
 void Character::boostArmor( int amount )
 {
     armor += amount;
@@ -141,20 +133,20 @@ void Character::attackInternal(Character& other)
             b) your stats are boosted 10%
             c) the initial value of your stats is updated to reflect this boosted stat for the next time you defeat another character.
       */
-        resetStatLevel(hitPoints, initialHitPoints, 0.1f);
-        resetStatLevel(armor, initialArmorLevel, 0.1f);
-        resetStatLevel(attackDamage, initialAttackDamage, 0.1f);
+        resetStatLevel(hitPoints, *initialHitPoints, 0.1f);
+        resetStatLevel(armor, *initialArmorLevel, 0.1f);
+        resetStatLevel(attackDamage, *initialAttackDamage, 0.1f);
         
         // assert(false);
         std::cout << getName() << " defeated " << other.getName() << " and leveled up!" << std::endl;        
     }
 }
 
-void Character::resetStatLevel(int& value, std::unique_ptr<int>& initialPtr, float adjustment)
+void Character::resetStatLevel(int& value, int& initialValue, float adjustment)
 {
-    if (value < *initialPtr ) { value = *initialPtr; }
+    if (value < initialValue ) { value = initialValue; }
     value *= (1.f + adjustment);
-    initialPtr.reset( new int(value));
+    initialValue = value;
 }
 
 

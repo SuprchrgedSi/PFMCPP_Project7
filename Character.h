@@ -27,13 +27,13 @@ struct Character
     
     int takeDamage(int damage);
     
-    int getHP() const;
-    int getArmorLevel() const;
-    int getAttackDamage() const;
-    bool getIsDefending() const;
-    
-    const std::vector<std::unique_ptr<Item>>& getHelpfulItems() const;
-    const std::vector<std::unique_ptr<Item>>& getDefensiveItems() const;
+int getHP() const { return hitPoints; }
+int getArmorLevel() const { return armor; }
+int getAttackDamage() const { return attackDamage; }
+bool getIsDefending() const { return isDefending; }
+
+const std::vector<std::unique_ptr<Item>>& getHelpfulItems() const { return helpfulItems; }
+const std::vector<std::unique_ptr<Item>>& getDefensiveItems() const { return defensiveItems; }
     
     void boostArmor( int amount );
     
@@ -54,5 +54,5 @@ private:
     std::unique_ptr<int> initialHitPoints, initialArmorLevel, initialAttackDamage;
     
     void attackInternal(Character& other);
-    void resetStatLevel(int& value, std::unique_ptr<int>& initialPtr, float adjustment);
+    void resetStatLevel(int& value, int& initialValue, float adjustment);
 };

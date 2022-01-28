@@ -3,6 +3,8 @@
 #include "Character.h"
 #include <cassert>
 
+DefensiveItem::DefensiveItem() : Item("defensive item", 3) { }
+
 void DefensiveItem::use(Character* character)
 {
     // assert(false); 

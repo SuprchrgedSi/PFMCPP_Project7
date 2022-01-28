@@ -2,7 +2,7 @@
 #include <string>
 #include "Character.h"
 
-struct Dwarf : public Character
+struct Dwarf : Character
 {
     static const int dwarfInitialAttackDamage;
 
